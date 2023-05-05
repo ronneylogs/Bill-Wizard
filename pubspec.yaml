@@ -64,6 +64,7 @@ flutter:
     - assets/animations/receipt.json
     - assets/animations/pizza.json
     - assets/animations/receipt_keeping.json
+    - assets/images/receipt.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

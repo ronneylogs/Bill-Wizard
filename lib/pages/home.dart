@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+// For utilities
+import '../utilities/card.dart';
+
+// import '../../assets/images/receipt.jpg'
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -17,18 +22,57 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Column(children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Row(
+              children: [
+                Column(),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    "Receipts",
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.1,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                plusCard()
+              ],
+            ),
+            Container(
+              height: screenHeight * 0.2,
+              child: ListView(scrollDirection: Axis.horizontal, children: [
+                receiptCard(
+                    Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+                receiptCard(
+                    Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+                receiptCard(
+                    Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+              ]),
+            ),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: Text(
-                    "Receipt Manager",
+                    "Money to collect",
                     style: TextStyle(
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold),
                   ),
-                )
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    "Friends",
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.1,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             )
           ]),
