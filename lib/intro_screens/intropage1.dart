@@ -20,29 +20,25 @@ class IntroPage1 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Lottie.asset('assets/animations/receipt.json'),
             RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   text: "Get your receipts ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: screenWidth * 0.1,
+                      fontSize: screenWidth * 0.07,
                       color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
                       text: 'recorded',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.1,
+                          fontSize: screenWidth * 0.07,
                           color: Colors.blue[200]),
                     ),
                   ],
                 )),
-            // Text("Get your receipts recorded",
-            //     textAlign: TextAlign.center,
-            //     style: TextStyle(
-            //         fontWeight: FontWeight.bold, fontSize: screenWidth * 0.1)),
-            Lottie.asset('assets/animations/receipt.json'),
             SizedBox(height: screenWidth * 0.3)
           ],
         ),

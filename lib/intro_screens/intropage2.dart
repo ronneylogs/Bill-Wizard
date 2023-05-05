@@ -15,32 +15,32 @@ class IntroPage2 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Lottie.asset('assets/animations/pizza.json'),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
                   text: "Make sure Jimmy ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: screenWidth * 0.1,
+                      fontSize: screenWidth * 0.07,
                       color: Colors.black),
                   children: [
                     TextSpan(
                       text: "pays",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.1,
+                          fontSize: screenWidth * 0.07,
                           color: Colors.green),
                     ),
                     TextSpan(
                       text: " you back for pizza last night",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.1,
+                          fontSize: screenWidth * 0.07,
                           color: Colors.black),
                     )
                   ]),
             ),
-            Lottie.asset('assets/animations/pizza.json'),
             SizedBox(height: screenWidth * 0.3)
           ],
         ),

@@ -31,32 +31,32 @@ class IntroPage3 extends StatelessWidget {
               ]),
             ),
             SizedBox(height: screenWidth * 0.2),
+            Lottie.asset('assets/animations/receipt_keeping.json'),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
                   text: "All in ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: screenWidth * 0.1,
+                      fontSize: screenWidth * 0.07,
                       color: Colors.black),
                   children: [
                     TextSpan(
                       text: "one",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.1,
+                          fontSize: screenWidth * 0.07,
                           color: Colors.yellow),
                     ),
                     TextSpan(
                       text: " easy place",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.1,
+                          fontSize: screenWidth * 0.07,
                           color: Colors.black),
                     )
                   ]),
             ),
-            Lottie.asset('assets/animations/receipt_keeping.json'),
             SizedBox(height: screenWidth * 0.3)
           ],
         ),
