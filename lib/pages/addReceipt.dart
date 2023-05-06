@@ -12,6 +12,9 @@ import 'package:flutter/services.dart';
 // Package for camera and image.
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
+
+// Packing for pathing.
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 // For Text Controllers
@@ -34,14 +37,27 @@ class _addReceiptState extends State<addReceipt> {
   // Used for receipt image
   File? _image;
   Future getImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
-    if (image == null) return;
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
 
-    final imageTemporary = File(image.path);
+      // final imageTemporary = File(image.path);
+      final imagePermanent = await saveFilePermanently(image.path);
 
-    setState(() {
-      this._image = imageTemporary;
-    });
+      setState(() {
+        this._image = imagePermanent;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image $e');
+    }
+  }
+
+  Future<File> saveFilePermanently(String imagePath) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final name = basename(imagePath);
+    final image = File('${directory.path}/$name');
+
+    return File(imagePath).copy(image.path);
   }
 
   @override
