@@ -1,9 +1,18 @@
 // Package for general Flutter.
+import 'dart:io';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+// import 'dart.io';
 
 // Package for date and time picker.
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
 import 'package:flutter/services.dart';
+
+// Package for camera and image.
+import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 // For Text Controllers
 TextEditingController location = TextEditingController();
@@ -22,6 +31,19 @@ class addReceipt extends StatefulWidget {
 }
 
 class _addReceiptState extends State<addReceipt> {
+  // Used for receipt image
+  File? _image;
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+
+    setState(() {
+      this._image = imageTemporary;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // For getting screen dimensions.
@@ -52,33 +74,74 @@ class _addReceiptState extends State<addReceipt> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // LOCATION
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8.0, left: 8, right: 8, bottom: 10),
-                  child: Text(
-                    "Location",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.05,
-                        color: Colors.grey[750]),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15, left: 8, right: 8),
-                  child: Container(
-                    width: screenWidth * 0.5,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 2.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // LOCATION
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8.0, left: 8, right: 8, bottom: 10),
+                          child: Text(
+                            "Location",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenWidth * 0.05,
+                                color: Colors.grey[750]),
+                          ),
                         ),
-                        hintText: 'ex. Boston Pizza',
-                        prefixIcon: Icon(Icons.store),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 15, left: 8, right: 8),
+                          child: Container(
+                            width: screenWidth * 0.5,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 2.0),
+                                ),
+                                hintText: 'ex. Boston Pizza',
+                                prefixIcon: Icon(Icons.store),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                    Column(
+                      children: [
+                        if (_image != null) ...[
+                          Padding(
+                            padding: const EdgeInsets.only(right: 55, top: 30),
+                            child: Image.file(_image!,
+                                width: screenWidth * 0.2,
+                                height: screenWidth * 0.2,
+                                fit: BoxFit.cover),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 55),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  getImage();
+                                },
+                                child: Text("Replace Image")),
+                          ),
+                        ] else ...[
+                          Padding(
+                            padding: const EdgeInsets.only(right: 55),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  getImage();
+                                },
+                                child: Text("Add Image")),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
                 ),
 
                 // WHEN
@@ -299,6 +362,8 @@ class _addReceiptState extends State<addReceipt> {
                     ),
                   ],
                 ),
+
+                // Total
                 Row(
                   children: [
                     Padding(
@@ -313,8 +378,20 @@ class _addReceiptState extends State<addReceipt> {
                       ),
                     ),
                   ],
+                ),
+
+                Row(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, right: 8, bottom: 10),
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text("Submit",
+                                style:
+                                    TextStyle(fontSize: screenWidth * 0.04)))),
+                  ],
                 )
-                // Tax
               ],
             ),
           ),
