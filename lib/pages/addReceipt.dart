@@ -200,8 +200,16 @@ class _addReceiptState extends State<addReceipt> {
                             width: screenWidth * 0.45,
                             child: TextField(
                               controller: tax,
-                              onChanged: (value) {
-                                tax.text = value;
+                              onSubmitted: (val) {
+                                setState(() {
+                                  tax.value = TextEditingValue(
+                                      text: val,
+                                      selection: TextSelection(
+                                          baseOffset: val.length,
+                                          extentOffset: val.length));
+                                  tax.text = val;
+                                  grandTotal = grandTotal + double.parse(val);
+                                });
                               },
                               keyboardType: TextInputType.number,
                               inputFormatters: [
@@ -243,8 +251,16 @@ class _addReceiptState extends State<addReceipt> {
                             width: screenWidth * 0.45,
                             child: TextField(
                               controller: tip,
-                              onChanged: (value) {
-                                tip.text = value;
+                              onSubmitted: (val) {
+                                setState(() {
+                                  tip.value = TextEditingValue(
+                                      text: val,
+                                      selection: TextSelection(
+                                          baseOffset: val.length,
+                                          extentOffset: val.length));
+                                  tip.text = val;
+                                  grandTotal = grandTotal + double.parse(val);
+                                });
                               },
                               keyboardType: TextInputType.number,
                               inputFormatters: [
