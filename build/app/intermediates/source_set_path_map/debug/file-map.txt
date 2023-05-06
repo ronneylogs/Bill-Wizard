@@ -21,3 +21,4 @@ com.ronney.billwizard.app-packaged_res-19 /Users/ronneylok/StudioProjects/Bill-W
 com.ronney.billwizard.app-packaged_res-20 /Users/ronneylok/StudioProjects/Bill-Wizard/build/flutter_plugin_android_lifecycle/intermediates/packaged_res/debug
 com.ronney.billwizard.app-packaged_res-21 /Users/ronneylok/StudioProjects/Bill-Wizard/build/image_picker_android/intermediates/packaged_res/debug
 com.ronney.billwizard.app-packaged_res-22 /Users/ronneylok/StudioProjects/Bill-Wizard/build/path_provider_android/intermediates/packaged_res/debug
+com.ronney.billwizard.app-packaged_res-23 /Users/ronneylok/StudioProjects/Bill-Wizard/build/shared_preferences_android/intermediates/packaged_res/debug

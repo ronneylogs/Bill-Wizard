@@ -4,10 +4,23 @@ import 'package:billwizard/pages/settings.dart';
 import 'package:billwizard/pages/split.dart';
 import 'package:flutter/material.dart';
 
+// Package for shared preferences.
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:billwizard/utilities/userSharedPreferences.dart';
+
 // For google bottom nav bar
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-void main() {
+// Package for async.
+import 'dart:async';
+
+bool loggedIn = false;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await UserSimplePreferences.init();
+  loggedIn = UserSimplePreferences.getLogged() ?? false;
   runApp(const MyApp());
 }
 
@@ -23,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnBoardingScreen(),
+      home: loggedIn ? NavBar(title: "hi") : OnBoardingScreen(),
     );
   }
 }
