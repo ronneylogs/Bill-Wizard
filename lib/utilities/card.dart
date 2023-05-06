@@ -1,4 +1,5 @@
 // Package for general flutter.
+import 'package:billwizard/pages/addReceipt.dart';
 import 'package:flutter/material.dart';
 
 // Class for plus card.
@@ -13,6 +14,9 @@ class plusCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // bring user to receipt add page
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return addReceipt();
+        }));
       },
       child: Container(
         decoration: BoxDecoration(
