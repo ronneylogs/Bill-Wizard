@@ -1,3 +1,5 @@
+// This file is for the receipt page UI.
+
 // Package for general Flutter.
 import 'dart:io';
 import 'dart:async';
@@ -24,6 +26,7 @@ TextEditingController subTotal = TextEditingController();
 TextEditingController tax = TextEditingController();
 TextEditingController tip = TextEditingController();
 
+// Variable to keep track of the grandTotal
 double grandTotal = 0;
 
 class addReceipt extends StatefulWidget {

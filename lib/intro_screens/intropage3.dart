@@ -1,3 +1,5 @@
+// This file is for the intro page 3 UI.
+
 // Package for general flutter packages.
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,7 @@ import 'package:lottie/lottie.dart';
 // Package for gradient usage.
 import "../utilities/gradient.dart";
 
+// Class for the intro page 3.
 class IntroPage3 extends StatelessWidget {
   const IntroPage3({super.key});
 

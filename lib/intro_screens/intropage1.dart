@@ -1,3 +1,5 @@
+// This file is for the intro page 1 UI.
+
 // Package for general flutter packages.
 import 'package:flutter/material.dart';
 

@@ -1,3 +1,5 @@
+// This file is for using the gradient text.
+
 // Package for general flutter.
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,13 @@
+// This file for the shared preferences.
+
+// Package for general Flutter.
 import 'dart:ffi';
 
+// Package for the shared preferences package.
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Class to keep track of the shared preferences.
+// Used as an interface for shared preferences.
 class UserSimplePreferences {
   static late SharedPreferences _preferences;
 

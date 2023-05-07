@@ -1,29 +1,43 @@
+// The root file of the app.
+
+// Package for general Flutter.
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package for other screens.
 import 'package:billwizard/onboarding_screen.dart';
 import 'package:billwizard/pages/home.dart';
 import 'package:billwizard/pages/settings.dart';
 import 'package:billwizard/pages/split.dart';
-import 'package:flutter/material.dart';
 
 // Package for shared preferences.
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:billwizard/utilities/userSharedPreferences.dart';
 
-// For google bottom nav bar
+// Package for google bottom nav bar.
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 // Package for async.
 import 'dart:async';
 
+// Flag for whether user is logged in or not.
 bool loggedIn = false;
 
 void main() async {
+  // Ensures widgets are intialized at the start of the app
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Keeps screen in portrait mode.
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  // For getting user shared preferences.
   await UserSimplePreferences.init();
   loggedIn = UserSimplePreferences.getLogged() ?? false;
+
+  // Runs the app.
   runApp(const MyApp());
 }
 
+// Class for the root of the app.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -51,6 +65,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  // Availabel screens in navbar
   final List pages = [
     const Home(),
     const Split(),

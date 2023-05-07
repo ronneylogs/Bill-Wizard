@@ -1,6 +1,12 @@
+// This file is for the intro page 2 UI.
+
+// Package for general Flutter.
 import 'package:flutter/material.dart';
+
+// Package for Lottie animations.
 import 'package:lottie/lottie.dart';
 
+// Class for the intro page 2.
 class IntroPage2 extends StatelessWidget {
   const IntroPage2({super.key});
 

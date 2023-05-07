@@ -1,10 +1,12 @@
+// This file is for the home page UI.
+
+// Package for general Flutter.
 import 'package:flutter/material.dart';
 
-// For utilities
+// Package for the utilities.
 import '../utilities/card.dart';
 
-// import '../../assets/images/receipt.jpg'
-
+// This class is for the home page.
 class Home extends StatefulWidget {
   const Home({super.key});
 

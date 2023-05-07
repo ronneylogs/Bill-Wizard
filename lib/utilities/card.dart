@@ -1,6 +1,10 @@
+// This file is to store the card widgets.
+
 // Package for general flutter.
-import 'package:billwizard/pages/addReceipt.dart';
 import 'package:flutter/material.dart';
+
+// Package for other pages.
+import 'package:billwizard/pages/addReceipt.dart';
 
 // Class for plus card.
 class plusCard extends StatelessWidget {

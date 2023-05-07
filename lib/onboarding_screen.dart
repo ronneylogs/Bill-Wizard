@@ -1,11 +1,15 @@
+// This file is for managing the onboard intro screens.
+
+// Package for general Flutter.
+import 'package:flutter/material.dart';
+
+// Package for other screens.
 import 'package:billwizard/intro_screens/intropage1.dart';
 import 'package:billwizard/intro_screens/intropage2.dart';
 import 'package:billwizard/intro_screens/intropage3.dart';
 import 'package:billwizard/main.dart';
 import 'package:billwizard/utilities/userSharedPreferences.dart';
-import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

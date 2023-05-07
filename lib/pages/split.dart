@@ -1,5 +1,9 @@
+// This file is for the bill splitting page UI.
+
+// Package for general Flutter.
 import 'package:flutter/material.dart';
 
+// This class is for the bill splitting page.
 class Split extends StatefulWidget {
   const Split({super.key});
 
