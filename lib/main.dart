@@ -24,6 +24,9 @@ import 'dart:async';
 // Flag for whether user is logged in or not.
 bool loggedIn = false;
 
+// Flag for whether user is first time launching the app or not.
+bool firstLaunch = false;
+
 void main() async {
   // Ensures widgets are intialized at the start of the app
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +37,7 @@ void main() async {
   // For getting user shared preferences.
   await UserSimplePreferences.init();
   loggedIn = UserSimplePreferences.getLogged() ?? false;
+  firstLaunch = UserSimplePreferences.getFirstLaunched() ?? false;
 
   // Runs the app.
   runApp(const MyApp());

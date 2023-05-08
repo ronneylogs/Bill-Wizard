@@ -5,9 +5,17 @@ import 'package:billwizard/main.dart';
 import 'package:billwizard/pages/register.dart';
 import 'package:flutter/material.dart';
 
+// Package for logger.
+import 'package:logger/logger.dart';
+
+// Package for Http.
+import 'package:http/http.dart' as http;
+
 late String username;
 
 late String password;
+
+bool logInError = false;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -61,6 +69,7 @@ class _LoginState extends State<Login> {
                     // ],
                     onChanged: (val) {
                       username = val;
+                      setState(() {});
                     },
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -99,6 +108,7 @@ class _LoginState extends State<Login> {
                     // ],
                     onChanged: (val) {
                       password = val;
+                      setState(() {});
                     },
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -112,6 +122,17 @@ class _LoginState extends State<Login> {
               )
             ],
           ),
+          if (logInError) ...[
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0, bottom: 15.0),
+                  child: Text("Incorrect password or email.",
+                      style: TextStyle(color: Colors.red)),
+                )
+              ],
+            )
+          ],
           Row(
             children: [
               Padding(
@@ -137,11 +158,30 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return NavBar(title: "hi");
-                      }));
+                    onPressed: () async {
+                      Map req = new Map();
+                      req = {
+                        "email": username,
+                        "password": password,
+                      };
+                      var baseUrl = Uri.parse("http://10.0.2.2:3000/api/logIn");
+                      var response = await http.post(baseUrl, body: req);
+
+                      print(response.body);
+
+                      if (response.body == "Incorrect password or email.") {
+                        setState(() {
+                          logInError = true;
+                        });
+                      } else {
+                        setState(() {
+                          logInError = false;
+                        });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return NavBar(title: "hi");
+                        }));
+                      }
                     },
                     child: Text("Log in")),
               )

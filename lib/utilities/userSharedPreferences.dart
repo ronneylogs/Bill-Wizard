@@ -13,6 +13,8 @@ class UserSimplePreferences {
 
   static const _keyLogged = "logged in?";
 
+  static const _firstLaunch = "first launch?";
+
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
@@ -20,4 +22,9 @@ class UserSimplePreferences {
       await _preferences.setBool(_keyLogged, keyLogged);
 
   static bool? getLogged() => _preferences.getBool(_keyLogged);
+
+  static Future setFirstLaunched(bool firstLaunch) async =>
+      await _preferences.setBool(_firstLaunch, firstLaunch);
+
+  static bool? getFirstLaunched() => _preferences.getBool(_firstLaunch);
 }

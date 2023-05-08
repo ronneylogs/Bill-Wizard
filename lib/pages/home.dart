@@ -46,9 +46,9 @@ class _HomeState extends State<Home> {
                 receiptCard(
                     Image.asset("assets/images/receipt.png"), "Boston Pizza"),
                 receiptCard(
-                    Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+                    Image.asset("assets/images/receipt.png"), "Apple Bees"),
                 receiptCard(
-                    Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+                    Image.asset("assets/images/receipt.png"), "Whitespot"),
               ]),
             ),
             Row(
