@@ -47,7 +47,7 @@ class IntroPage2 extends StatelessWidget {
                     )
                   ]),
             ),
-            SizedBox(height: screenWidth * 0.3)
+            SizedBox(height: screenWidth * 0.3),
           ],
         ),
       ),
