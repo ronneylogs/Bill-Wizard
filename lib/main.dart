@@ -10,6 +10,7 @@ import 'package:billwizard/pages/home.dart';
 import 'package:billwizard/pages/settings.dart';
 import 'package:billwizard/pages/split.dart';
 import 'package:billwizard/pages/register.dart';
+import 'package:billwizard/pages/login.dart';
 
 // Package for shared preferences.
 import 'package:billwizard/utilities/userSharedPreferences.dart';
@@ -46,14 +47,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Register()
-        // loggedIn ? NavBar(title: "hi") : OnBoardingScreen(),
-        );
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Login(),
+      // loggedIn ? NavBar(title: "hi") : OnBoardingScreen(),
+    );
   }
 }
 
