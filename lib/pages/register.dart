@@ -120,6 +120,13 @@ class _RegisterState extends State<Register> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        backgroundColor: Colors.white,
+        title: const Text('Register', style: TextStyle(color: Colors.black)),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Column(

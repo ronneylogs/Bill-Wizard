@@ -72,3 +72,38 @@ class receiptCard extends StatelessWidget {
     );
   }
 }
+
+// Class for login card.
+class loginCard extends StatelessWidget {
+  // const loginCard({super.key});
+  loginCard(this.content);
+  Container content;
+
+  @override
+  Widget build(BuildContext context) {
+    // For getting screen dimensions.
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+        margin: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(3.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white,
+
+              blurRadius: 4,
+              offset: Offset(4, 8), // Shadow position
+            ),
+          ],
+        ),
+
+        // color: Colors.grey[],
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: content,
+        ));
+  }
+}
