@@ -19,6 +19,20 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+// Function for adding subtotal,tax and tip.
+void addTotal() {
+  grandTotal = 0;
+  if (subTotal.text != "") {
+    grandTotal += double.parse(subTotal.text);
+  }
+  if (tax.text != "") {
+    grandTotal += double.parse(tax.text);
+  }
+  if (tip.text != "") {
+    grandTotal += double.parse(tip.text);
+  }
+}
+
 // For Text Controllers
 TextEditingController location = TextEditingController();
 TextEditingController time = TextEditingController();
@@ -240,15 +254,29 @@ class _addReceiptState extends State<addReceipt> {
                         FilteringTextInputFormatter.allow(
                             RegExp(r'^\d+\.?\d{0,2}'))
                       ],
-                      onSubmitted: (val) {
+                      onChanged: (val) {
+                        subTotal.value = TextEditingValue(
+                            text: val,
+                            selection: TextSelection(
+                                baseOffset: val.length,
+                                extentOffset: val.length));
                         setState(() {
-                          subTotal.value = TextEditingValue(
-                              text: val,
-                              selection: TextSelection(
-                                  baseOffset: val.length,
-                                  extentOffset: val.length));
-                          subTotal.text = val;
-                          grandTotal = grandTotal + double.parse(val);
+                          // subTotal.text = val;
+                          // grandTotal = 0;
+                          // if (tax.text != "") {
+                          //   grandTotal += double.parse(tax.text);
+                          // }
+                          // if (tip.text != "") {
+                          //   grandTotal += double.parse(tip.text);
+                          // }
+                          // if (subTotal.text != "") {
+                          //   grandTotal += double.parse(subTotal.text);
+                          // }
+                          addTotal();
+
+                          // grandTotal = double.parse(tax.text)! +
+                          //     double.parse(tip.text) +
+                          //     double.parse(val);
                         });
                       },
                       decoration: InputDecoration(
@@ -286,15 +314,15 @@ class _addReceiptState extends State<addReceipt> {
                             width: screenWidth * 0.45,
                             child: TextField(
                               controller: tax,
-                              onSubmitted: (val) {
+                              onChanged: (val) {
                                 setState(() {
                                   tax.value = TextEditingValue(
                                       text: val,
                                       selection: TextSelection(
                                           baseOffset: val.length,
                                           extentOffset: val.length));
-                                  tax.text = val;
-                                  grandTotal = grandTotal + double.parse(val);
+
+                                  addTotal();
                                 });
                               },
                               keyboardType: TextInputType.number,
@@ -337,15 +365,15 @@ class _addReceiptState extends State<addReceipt> {
                             width: screenWidth * 0.45,
                             child: TextField(
                               controller: tip,
-                              onSubmitted: (val) {
+                              onChanged: (val) {
                                 setState(() {
                                   tip.value = TextEditingValue(
                                       text: val,
                                       selection: TextSelection(
                                           baseOffset: val.length,
                                           extentOffset: val.length));
-                                  tip.text = val;
-                                  grandTotal = grandTotal + double.parse(val);
+
+                                  addTotal();
                                 });
                               },
                               keyboardType: TextInputType.number,
@@ -394,7 +422,7 @@ class _addReceiptState extends State<addReceipt> {
                           const EdgeInsets.only(left: 15, right: 8, bottom: 10),
                       child: Text(
                         textAlign: TextAlign.start,
-                        "${grandTotal}",
+                        "${grandTotal.toStringAsFixed(2)}",
                         style: TextStyle(
                             fontSize: screenWidth * 0.05,
                             color: Colors.grey[750]),
