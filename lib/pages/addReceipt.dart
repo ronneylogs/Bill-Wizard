@@ -23,6 +23,8 @@ import 'package:path_provider/path_provider.dart';
 // Package for Http.
 import 'package:http/http.dart' as http;
 
+import '../main.dart';
+
 // Function for adding subtotal,tax and tip.
 void addTotal() {
   grandTotal = 0;
@@ -458,6 +460,7 @@ class _addReceiptState extends State<addReceipt> {
                                   Color.fromRGBO(88, 144, 255, 1)),
                             ),
                             onPressed: () async {
+                              print(globalInfo.email);
                               time.text = "${month} ${day} ${year}";
                               Map req = new Map();
                               req = {
@@ -466,6 +469,7 @@ class _addReceiptState extends State<addReceipt> {
                                 "subTotal": subTotal.text,
                                 "tax": tax.text,
                                 "tip": tip.text,
+                                "payerEmail": globalInfo.email,
                               };
                               var baseUrl = Uri.parse(
                                   "http://10.0.2.2:3000/api/createReceipt");

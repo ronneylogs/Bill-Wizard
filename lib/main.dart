@@ -11,6 +11,7 @@ import 'package:billwizard/pages/settings.dart';
 import 'package:billwizard/pages/split.dart';
 import 'package:billwizard/pages/register.dart';
 import 'package:billwizard/pages/login.dart';
+import 'package:billwizard/utilities/global.dart';
 
 // Package for shared preferences.
 import 'package:billwizard/utilities/userSharedPreferences.dart';
@@ -20,6 +21,9 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 // Package for async.
 import 'dart:async';
+
+// Class to store global data.
+Global globalInfo = new Global();
 
 // Flag for whether user is logged in or not.
 bool loggedIn = false;

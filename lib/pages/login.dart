@@ -37,12 +37,6 @@ class Login extends StatefulWidget {
       passwordLogIn.text = "";
     }
   }
-  // if(rememberUser)
-  // String log1;
-  // String clientID;
-  // const UserData(this.clientName,this.clientID);
-
-  // const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -170,6 +164,7 @@ class _LoginState extends State<Login> {
                           width: screenWidth * 0.7,
                           // height: screenHeight * 0.1,
                           child: TextField(
+                            obscureText: true,
                             controller: passwordLogIn,
                             // keyboardType: TextInputType.number,
                             // inputFormatters: [
@@ -266,7 +261,6 @@ class _LoginState extends State<Login> {
                                   UserSimplePreferences.setRememberUsername("");
                                   UserSimplePreferences.setRememberPassword("");
                                 }
-
                                 Map req = new Map();
                                 req = {
                                   "email": usernameLogIn.text,
@@ -288,6 +282,9 @@ class _LoginState extends State<Login> {
                                   setState(() {
                                     logInError = false;
                                   });
+
+                                  // Store new email
+                                  globalInfo.email = usernameLogIn.text;
 
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {

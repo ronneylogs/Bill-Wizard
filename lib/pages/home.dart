@@ -26,8 +26,7 @@ class _HomeState extends State<Home> {
         child: Container(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             Row(
-              children: [
-                Column(),
+              children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: Text(
@@ -37,19 +36,26 @@ class _HomeState extends State<Home> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                plusCard()
+                const plusCard(),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: const inboxCard(),
+                ),
               ],
             ),
             Container(
               height: screenHeight * 0.2,
-              child: ListView(scrollDirection: Axis.horizontal, children: [
-                receiptCard(
-                    Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-                receiptCard(
-                    Image.asset("assets/images/receipt.png"), "Apple Bees"),
-                receiptCard(
-                    Image.asset("assets/images/receipt.png"), "Whitespot"),
-              ]),
+              child: Scrollbar(
+                child: ListView(scrollDirection: Axis.horizontal, children: [
+                  receiptCard(
+                      Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+                  receiptCard(
+                      Image.asset("assets/images/receipt.png"), "Apple Bees"),
+                  receiptCard(
+                      Image.asset("assets/images/receipt.png"), "Whitespot"),
+                ]),
+              ),
             ),
             Row(
               children: [
@@ -57,6 +63,19 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(20),
                   child: Text(
                     "Money to collect",
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.1,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    "Money to owe",
                     style: TextStyle(
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold),
