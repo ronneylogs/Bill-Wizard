@@ -3,6 +3,8 @@
 // Package for general FLutter.
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 // This class is for settings page.
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -14,10 +16,16 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text("Settings"),
+    return Scaffold(
+        body: SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          children: [
+            Text(globalInfo.firstName),
+            Text(globalInfo.lastName),
+          ],
+        ),
       ),
-    );
+    ));
   }
 }

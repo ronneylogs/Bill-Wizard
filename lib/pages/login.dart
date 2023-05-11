@@ -1,6 +1,8 @@
 // This file is for login page UI.
 
 // Package for general Flutter.
+import 'dart:convert';
+
 import 'package:billwizard/main.dart';
 import 'package:billwizard/pages/register.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ import 'package:http/http.dart' as http;
 // Package for other pages.
 import '../utilities/card.dart';
 import '../utilities/userSharedPreferences.dart';
+import '../utilities/api.dart';
 
 // For username text input.
 TextEditingController usernameLogIn = TextEditingController();
@@ -282,9 +285,15 @@ class _LoginState extends State<Login> {
                                   setState(() {
                                     logInError = false;
                                   });
+                                  Future<Map<String, dynamic>> userInfo =
+                                      grabUserInfo(usernameLogIn.text);
 
-                                  // Store new email
+                                  // Stores user info
                                   globalInfo.email = usernameLogIn.text;
+                                  globalInfo.firstName =
+                                      (await userInfo)['first_name'];
+                                  globalInfo.lastName =
+                                      (await userInfo)['last_name'];
 
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {

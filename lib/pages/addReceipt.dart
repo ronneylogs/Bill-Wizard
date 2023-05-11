@@ -25,6 +25,35 @@ import 'package:http/http.dart' as http;
 
 import '../main.dart';
 
+// Function for adding receipt.
+Future<void> sendRequestWithFile() async {
+  var request = http.MultipartRequest(
+      'POST', Uri.parse('http://10.0.2.2:3000/api/createReceipt'));
+
+  // Add the file to the request
+  var file = await http.MultipartFile.fromPath('image', imgPath);
+  request.files.add(file);
+
+  // Add additional fields
+  request.fields['location'] = location.text;
+  request.fields['when'] = time.text;
+  request.fields['subTotal'] = subTotal.text;
+  request.fields['tax'] = tax.text;
+  request.fields['tip'] = tip.text;
+  request.fields['payerEmail'] = globalInfo.email;
+  // request.fields['image'] = imgPath;
+
+  // Send the request
+  var response = await request.send();
+
+  // Handle the response
+  if (response.statusCode == 200) {
+    print('Request successful');
+  } else {
+    print('Request failed with status code: ${response.statusCode}');
+  }
+}
+
 // Function for adding subtotal,tax and tip.
 void addTotal() {
   grandTotal = 0;
@@ -53,6 +82,9 @@ String year = "2023";
 // Variable to keep track of the grandTotal
 double grandTotal = 0;
 
+// Keeps track of image path.
+late String imgPath;
+
 class addReceipt extends StatefulWidget {
   const addReceipt({super.key});
 
@@ -69,7 +101,9 @@ class _addReceiptState extends State<addReceipt> {
       if (image == null) return;
 
       // final imageTemporary = File(image.path);
+
       final imagePermanent = await saveFilePermanently(image.path);
+      imgPath = image.path;
 
       setState(() {
         this._image = imagePermanent;
@@ -462,21 +496,24 @@ class _addReceiptState extends State<addReceipt> {
                             onPressed: () async {
                               print(globalInfo.email);
                               time.text = "${month} ${day} ${year}";
-                              Map req = new Map();
-                              req = {
-                                "location": location.text,
-                                "when": time.text,
-                                "subTotal": subTotal.text,
-                                "tax": tax.text,
-                                "tip": tip.text,
-                                "payerEmail": globalInfo.email,
-                              };
-                              var baseUrl = Uri.parse(
-                                  "http://10.0.2.2:3000/api/createReceipt");
-                              var response =
-                                  await http.post(baseUrl, body: req);
+                              // Map req = new Map();
+                              // req = {
+                              //   "location": location.text,
+                              //   "when": time.text,
+                              //   "subTotal": subTotal.text,
+                              //   "tax": tax.text,
+                              //   "tip": tip.text,
+                              //   "payerEmail": globalInfo.email,
+                              //   "split": false,
+                              //   "image":
+                              // };
+                              // var baseUrl = Uri.parse(
+                              //     "http://10.0.2.2:3000/api/createReceipt");
+                              // var response =
+                              //     await http.post(baseUrl, body: req);
 
-                              print(response.body);
+                              // print(response.body);
+                              sendRequestWithFile();
                               Navigator.pop(context);
                             },
                             child: Text("Submit",
