@@ -4,6 +4,7 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:billwizard/pages/register.dart';
 import 'package:flutter/material.dart';
 // import 'dart.io';
 
@@ -18,6 +19,9 @@ import 'package:image_picker/image_picker.dart';
 // Packing for pathing.
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+
+// Package for Http.
+import 'package:http/http.dart' as http;
 
 // Function for adding subtotal,tax and tip.
 void addTotal() {
@@ -39,6 +43,10 @@ TextEditingController time = TextEditingController();
 TextEditingController subTotal = TextEditingController();
 TextEditingController tax = TextEditingController();
 TextEditingController tip = TextEditingController();
+
+String month = "January";
+String day = "14";
+String year = "2023";
 
 // Variable to keep track of the grandTotal
 double grandTotal = 0;
@@ -131,6 +139,14 @@ class _addReceiptState extends State<addReceipt> {
                           child: Container(
                             width: screenWidth * 0.5,
                             child: TextFormField(
+                              controller: location,
+                              onChanged: (val) {
+                                location.value = TextEditingValue(
+                                    text: val,
+                                    selection: TextSelection(
+                                        baseOffset: val.length,
+                                        extentOffset: val.length));
+                              },
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -216,9 +232,9 @@ class _addReceiptState extends State<addReceipt> {
                     selectedDay: 14, // optional
                     selectedMonth: 1, // optional
                     selectedYear: 2023, // optional
-                    onChangedDay: (value) => print('onChangedDay: $value'),
-                    onChangedMonth: (value) => print('onChangedMonth: $value'),
-                    onChangedYear: (value) => print('onChangedYear: $value'),
+                    onChangedDay: (value) => day = value!,
+                    onChangedMonth: (value) => month = value!,
+                    onChangedYear: (value) => year = value!,
                     //boxDecoration: BoxDecoration(
                     // border: Border.all(color: Colors.grey, width: 1.0)), // optional
                     // showDay: false,// optional
@@ -441,7 +457,24 @@ class _addReceiptState extends State<addReceipt> {
                               backgroundColor: MaterialStateProperty.all(
                                   Color.fromRGBO(88, 144, 255, 1)),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              time.text = "${month} ${day} ${year}";
+                              Map req = new Map();
+                              req = {
+                                "location": location.text,
+                                "when": time.text,
+                                "subTotal": subTotal.text,
+                                "tax": tax.text,
+                                "tip": tip.text,
+                              };
+                              var baseUrl = Uri.parse(
+                                  "http://10.0.2.2:3000/api/createReceipt");
+                              var response =
+                                  await http.post(baseUrl, body: req);
+
+                              print(response.body);
+                              Navigator.pop(context);
+                            },
                             child: Text("Submit",
                                 style:
                                     TextStyle(fontSize: screenWidth * 0.04)))),
