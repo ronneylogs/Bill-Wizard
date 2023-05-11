@@ -24,8 +24,8 @@ class plusCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.blue[200],
-            border: Border.all(color: Colors.blue.shade200),
+            color: Color.fromRGBO(88, 144, 255, 1),
+            // border: Border.all(color: Colors.blue.shade200),
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.all(5),
@@ -88,16 +88,17 @@ class loginCard extends StatelessWidget {
         margin: const EdgeInsets.all(15.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
+          color: Colors.white,
           border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white,
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.white,
 
-              blurRadius: 4,
-              offset: Offset(4, 8), // Shadow position
-            ),
-          ],
+          //     blurRadius: 4,
+          //     offset: Offset(4, 8), // Shadow position
+          //   ),
+          // ],
         ),
 
         // color: Colors.grey[],

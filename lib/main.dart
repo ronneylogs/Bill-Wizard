@@ -27,6 +27,13 @@ bool loggedIn = false;
 // Flag for whether user is first time launching the app or not.
 bool firstLaunch = false;
 
+// Flag for whether user wants login information recorded.
+bool rememberUser = false;
+
+late String username_shared;
+
+late String password_shared;
+
 void main() async {
   // Ensures widgets are intialized at the start of the app
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +45,9 @@ void main() async {
   await UserSimplePreferences.init();
   loggedIn = UserSimplePreferences.getLogged() ?? false;
   firstLaunch = UserSimplePreferences.getFirstLaunched() ?? false;
+  rememberUser = UserSimplePreferences.getRememberUser() ?? false;
+  username_shared = UserSimplePreferences.getRememberUsername() ?? "";
+  password_shared = UserSimplePreferences.getRememberPassword() ?? "";
 
   // Runs the app.
   runApp(const MyApp());
@@ -56,7 +66,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      home: Login(rememberUser),
       // loggedIn ? NavBar(title: "hi") : OnBoardingScreen(),
     );
   }

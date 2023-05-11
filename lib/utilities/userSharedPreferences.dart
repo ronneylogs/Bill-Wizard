@@ -15,6 +15,12 @@ class UserSimplePreferences {
 
   static const _firstLaunch = "first launch?";
 
+  static const _rememberUser = "remember user?";
+
+  static const _username = "username";
+
+  static const _password = "password";
+
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
@@ -27,4 +33,19 @@ class UserSimplePreferences {
       await _preferences.setBool(_firstLaunch, firstLaunch);
 
   static bool? getFirstLaunched() => _preferences.getBool(_firstLaunch);
+
+  static Future setRememberUser(bool rememberUser) async =>
+      await _preferences.setBool(_rememberUser, rememberUser);
+
+  static bool? getRememberUser() => _preferences.getBool(_rememberUser);
+
+  static Future setRememberUsername(String username) async =>
+      await _preferences.setString(_username, username);
+
+  static String? getRememberUsername() => _preferences.getString(_username);
+
+  static Future setRememberPassword(String password) async =>
+      await _preferences.setString(_password, password);
+
+  static String? getRememberPassword() => _preferences.getString(_password);
 }

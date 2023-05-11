@@ -3,6 +3,7 @@
 // Package for general Flutter.
 import 'dart:io';
 import 'package:billwizard/main.dart';
+import 'package:billwizard/utilities/userSharedPreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,6 +12,8 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 // Package for Http.
 import 'package:http/http.dart' as http;
+
+import 'login.dart';
 
 // For Text Controllers
 TextEditingController firstName = TextEditingController();
@@ -457,6 +460,10 @@ class _RegisterState extends State<Register> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(88, 144, 255, 1)),
+                      ),
                       onPressed: () async {
                         // For Http;
                         // var baseUrl = Uri.parse("http://10.0.2.2:3000/api");
@@ -485,13 +492,19 @@ class _RegisterState extends State<Register> {
 
                           print(response.body);
 
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return NavBar(title: "hi");
-                          }));
+                          setState(() {
+                            // UserSimplePreferences.setRememberUser(false);
+                            // UserSimplePreferences.setRememberUsername("");
+                            // UserSimplePreferences.setRememberPassword("");
+                            rememberUser = false;
+                            usernameLogIn.text = "";
+                            passwordLogIn.text = "";
+                          });
+
+                          Navigator.pop(context);
                         }
                       },
-                      child: Text("Submit")),
+                      child: Text("Register")),
                 )
               ],
             ),

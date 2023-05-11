@@ -13,15 +13,36 @@ import 'package:http/http.dart' as http;
 
 // Package for other pages.
 import '../utilities/card.dart';
+import '../utilities/userSharedPreferences.dart';
 
-late String username;
+// For username text input.
+TextEditingController usernameLogIn = TextEditingController();
 
-late String password;
+// For password text input.
+TextEditingController passwordLogIn = TextEditingController();
 
+// Flag for if user enters the wrong password.
 bool logInError = false;
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  Login(bool rememberUser, {super.key}) {
+    if (rememberUser) {
+      print("hello");
+      print(username_shared);
+      print(password_shared);
+      usernameLogIn.text = username_shared;
+      passwordLogIn.text = password_shared;
+    } else {
+      usernameLogIn.text = "";
+      passwordLogIn.text = "";
+    }
+  }
+  // if(rememberUser)
+  // String log1;
+  // String clientID;
+  // const UserData(this.clientName,this.clientID);
+
+  // const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -34,13 +55,42 @@ class _LoginState extends State<Login> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: SafeArea(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Text("Bill Wizard",
+                      style: TextStyle(
+                          fontSize: screenWidth * 0.12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text("Start your money saving journey now.",
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.06,
+                          color: Colors.black,
+                        )),
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.1),
+              padding: EdgeInsets.only(top: screenHeight * 0.02),
               child: loginCard(
                 Container(
                     child: Column(children: [
@@ -75,12 +125,17 @@ class _LoginState extends State<Login> {
                           width: screenWidth * 0.7,
                           height: screenHeight * 0.1,
                           child: TextField(
+                            controller: usernameLogIn,
                             // keyboardType: TextInputType.number,
                             // inputFormatters: [
                             //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
                             // ],
                             onChanged: (val) {
-                              username = val;
+                              usernameLogIn.value = TextEditingValue(
+                                text: val,
+                                selection:
+                                    TextSelection.collapsed(offset: val.length),
+                              );
                               setState(() {});
                             },
                             decoration: InputDecoration(
@@ -113,14 +168,20 @@ class _LoginState extends State<Login> {
                         padding: const EdgeInsets.only(left: 15.0),
                         child: Container(
                           width: screenWidth * 0.7,
-                          height: screenHeight * 0.1,
+                          // height: screenHeight * 0.1,
                           child: TextField(
+                            controller: passwordLogIn,
                             // keyboardType: TextInputType.number,
                             // inputFormatters: [
                             //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
                             // ],
+
                             onChanged: (val) {
-                              password = val;
+                              passwordLogIn.value = TextEditingValue(
+                                text: val,
+                                selection:
+                                    TextSelection.collapsed(offset: val.length),
+                              );
                               setState(() {});
                             },
                             decoration: InputDecoration(
@@ -148,6 +209,20 @@ class _LoginState extends State<Login> {
                       ],
                     )
                   ],
+                  Row(children: [
+                    Checkbox(
+                      checkColor: Colors.white,
+                      // fillColor: MaterialStateProperty.resolveWith(getColor),
+                      value: rememberUser,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          rememberUser = value!;
+                          UserSimplePreferences.setRememberUser(rememberUser);
+                        });
+                      },
+                    ),
+                    Text("Remember me?")
+                  ]),
                   Row(
                     children: [
                       Padding(
@@ -174,14 +249,28 @@ class _LoginState extends State<Login> {
                       Padding(
                         padding: const EdgeInsets.only(left: 15.0),
                         child: SizedBox(
-                          width: screenWidth * 0.2,
+                          width: screenWidth * 0.7,
                           height: screenHeight * 0.045,
                           child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromRGBO(88, 144, 255, 1)),
+                              ),
                               onPressed: () async {
+                                if (rememberUser) {
+                                  UserSimplePreferences.setRememberUsername(
+                                      usernameLogIn.text);
+                                  UserSimplePreferences.setRememberPassword(
+                                      passwordLogIn.text);
+                                } else {
+                                  UserSimplePreferences.setRememberUsername("");
+                                  UserSimplePreferences.setRememberPassword("");
+                                }
+
                                 Map req = new Map();
                                 req = {
-                                  "email": username,
-                                  "password": password,
+                                  "email": usernameLogIn.text,
+                                  "password": passwordLogIn.text,
                                 };
                                 var baseUrl =
                                     Uri.parse("http://10.0.2.2:3000/api/logIn");
@@ -199,6 +288,7 @@ class _LoginState extends State<Login> {
                                   setState(() {
                                     logInError = false;
                                   });
+
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return NavBar(title: "hi");

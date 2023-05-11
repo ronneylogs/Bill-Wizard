@@ -152,6 +152,10 @@ class _addReceiptState extends State<addReceipt> {
                           Padding(
                             padding: const EdgeInsets.only(right: 55),
                             child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color.fromRGBO(88, 144, 255, 1)),
+                                ),
                                 onPressed: () {
                                   getImage();
                                 },
@@ -196,7 +200,7 @@ class _addReceiptState extends State<addReceipt> {
                     endYear: 2023, // optional
                     width: 10, // optional
                     selectedDay: 14, // optional
-                    selectedMonth: 10, // optional
+                    selectedMonth: 1, // optional
                     selectedYear: 2023, // optional
                     onChangedDay: (value) => print('onChangedDay: $value'),
                     onChangedMonth: (value) => print('onChangedMonth: $value'),
@@ -405,6 +409,10 @@ class _addReceiptState extends State<addReceipt> {
                         padding: const EdgeInsets.only(
                             left: 15, right: 8, bottom: 10),
                         child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  Color.fromRGBO(88, 144, 255, 1)),
+                            ),
                             onPressed: () {},
                             child: Text("Submit",
                                 style:
