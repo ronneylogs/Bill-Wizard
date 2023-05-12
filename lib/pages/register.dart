@@ -3,9 +3,8 @@
 // Package for general Flutter.
 import 'dart:io';
 import 'package:billwizard/main.dart';
-import 'package:billwizard/utilities/userSharedPreferences.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 // Package for toggle switch.
 import 'package:toggle_switch/toggle_switch.dart';
