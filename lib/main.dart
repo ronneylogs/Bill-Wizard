@@ -4,6 +4,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Package for decoration clippers.
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+
 // Package for other screens.
 import 'package:billwizard/onboarding_screen.dart';
 import 'package:billwizard/pages/home.dart';
