@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -32,6 +33,7 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Receipts",
                     style: TextStyle(
+                        // color: Colors.white,
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold),
                   ),
@@ -64,6 +66,7 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Money to collect",
                     style: TextStyle(
+                        // color: Colors.white,
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold),
                   ),
@@ -77,6 +80,7 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Money to owe",
                     style: TextStyle(
+                        // color: Colors.white,
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold),
                   ),
@@ -90,6 +94,7 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Friends",
                     style: TextStyle(
+                        // color: Colors.white,
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold),
                   ),

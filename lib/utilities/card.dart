@@ -90,6 +90,11 @@ class receiptCard extends StatelessWidget {
         // Navigate to the receipt.
       },
       child: Container(
+        margin: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Colors.white,
+            border: Border.all(color: Colors.black)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
