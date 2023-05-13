@@ -126,11 +126,11 @@ class loginCard extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-        margin: const EdgeInsets.all(15.0),
-        padding: const EdgeInsets.all(3.0),
+        margin: const EdgeInsets.only(left: 15.0, right: 15),
+        padding: const EdgeInsets.only(left: 3.0, right: 3),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.black),
+          // border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.all(Radius.circular(15)),
           // boxShadow: [
           //   BoxShadow(

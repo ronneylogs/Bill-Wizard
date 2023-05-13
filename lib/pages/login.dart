@@ -58,51 +58,49 @@ class _LoginState extends State<Login> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(height: screenHeight * 0.05),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    height: screenHeight * 0.2,
+                    child: Image.asset('assets/images/wizard.png'))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: Text("Bill Wizard",
                       style: TextStyle(
-                          fontSize: screenWidth * 0.12,
+                          fontSize: screenWidth * 0.1,
                           color: Colors.black,
                           fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text("Start your money saving journey now.",
-                        style: TextStyle(
-                          fontSize: screenWidth * 0.06,
-                          color: Colors.black,
-                        )),
-                  ),
-                ),
-              ],
-            ),
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Expanded(
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(15),
+            //         child: Text("Start your money saving journey now.",
+            //             style: TextStyle(
+            //               fontSize: screenWidth * 0.06,
+            //               color: Colors.black,
+            //             )),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.02),
+              padding: EdgeInsets.only(top: screenHeight * 0.01),
               child: loginCard(
                 Container(
                     child: Column(children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Login",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: screenWidth * 0.1)),
-                      ),
-                    ],
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

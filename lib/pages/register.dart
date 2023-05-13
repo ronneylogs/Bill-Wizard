@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:billwizard/main.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package for toggle switch.
 import 'package:toggle_switch/toggle_switch.dart';
@@ -12,7 +13,45 @@ import 'package:toggle_switch/toggle_switch.dart';
 // Package for Http.
 import 'package:http/http.dart' as http;
 
+// Package for camera and image.
+import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
+
+// Packing for pathing.
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+
 import 'login.dart';
+
+// Function for adding receipt.
+Future<void> sendRegisterWithFile() async {
+  var request = http.MultipartRequest(
+      'POST', Uri.parse('http://10.0.2.2:3000/api/createUser'));
+
+  // Add the file to the request
+  var file = await http.MultipartFile.fromPath('image', imgPath);
+  request.files.add(file);
+
+  // Add additional fields
+  request.fields['firstName'] = firstName.text;
+  request.fields['lastName'] = lastName.text;
+  request.fields['email'] = email.text;
+  request.fields['ageTest'] = ageCheck.toString();
+  request.fields['password'] = password.text;
+
+  // Send the request
+  var response = await request.send();
+
+  // Handle the response
+  if (response.statusCode == 200) {
+    print('Request successful');
+  } else {
+    print('Request failed with status code: ${response.statusCode}');
+  }
+}
+
+// Keeps track of image path.
+late String imgPath;
 
 // For Text Controllers
 TextEditingController firstName = TextEditingController();
@@ -116,6 +155,34 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  // Used for receipt image
+  File? _image;
+  Future getImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+
+      // final imageTemporary = File(image.path);
+
+      final imagePermanent = await saveFilePermanently(image.path);
+      imgPath = image.path;
+
+      setState(() {
+        this._image = imagePermanent;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image $e');
+    }
+  }
+
+  Future<File> saveFilePermanently(String imagePath) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final name = basename(imagePath);
+    final image = File('${directory.path}/$name');
+
+    return File(imagePath).copy(image.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     // For getting screen dimensions.
@@ -146,105 +213,149 @@ class _RegisterState extends State<Register> {
                 ),
               ],
             ),
-
-            // First name
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text("First Name",
-                      style: TextStyle(
-                          // fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.05)),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Container(
-                    width: screenWidth * 0.5,
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: firstName,
-                      // keyboardType: TextInputType.number,
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
-                      // ],
-                      onChanged: (val) {
-                        firstName.value = TextEditingValue(
-                          text: val,
-                          selection:
-                              TextSelection.collapsed(offset: val.length),
-                        );
-                        firstNameInteract = true;
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 2.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // First name
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text("First Name",
+                              style: TextStyle(
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: screenWidth * 0.05)),
                         ),
-                        hintText: ' ex. Veronica',
-                        errorText: validateFirstName(),
-                        prefixIcon: Icon(Icons.person),
-                      ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-
-            // Last name.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text("Last Name",
-                      style: TextStyle(
-                          // fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.05)),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Container(
-                    width: screenWidth * 0.5,
-                    child: TextFormField(
-                      controller: lastName,
-                      // keyboardType: TextInputType.number,
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
-                      // ],
-                      onChanged: (val) {
-                        lastName.value = TextEditingValue(
-                          text: val,
-                          selection:
-                              TextSelection.collapsed(offset: val.length),
-                        );
-                        lastNameInteract = true;
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 2.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Container(
+                            width: screenWidth * 0.5,
+                            child: TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: firstName,
+                              // keyboardType: TextInputType.number,
+                              // inputFormatters: [
+                              //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                              // ],
+                              onChanged: (val) {
+                                firstName.value = TextEditingValue(
+                                  text: val,
+                                  selection: TextSelection.collapsed(
+                                      offset: val.length),
+                                );
+                                firstNameInteract = true;
+                                setState(() {});
+                              },
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 2.0),
+                                ),
+                                hintText: ' ex. Veronica',
+                                errorText: validateFirstName(),
+                                prefixIcon: Icon(Icons.person),
+                              ),
+                            ),
+                          ),
                         ),
-                        hintText: ' ex. Smith',
-                        errorText: validateLastName(),
-                        prefixIcon: Icon(Icons.person),
-                      ),
+                      ],
                     ),
-                  ),
+
+                    // Last name.
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text("Last Name",
+                              style: TextStyle(
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: screenWidth * 0.05)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Container(
+                            width: screenWidth * 0.5,
+                            child: TextFormField(
+                              controller: lastName,
+                              // keyboardType: TextInputType.number,
+                              // inputFormatters: [
+                              //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                              // ],
+                              onChanged: (val) {
+                                lastName.value = TextEditingValue(
+                                  text: val,
+                                  selection: TextSelection.collapsed(
+                                      offset: val.length),
+                                );
+                                lastNameInteract = true;
+                                setState(() {});
+                              },
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 2.0),
+                                ),
+                                hintText: ' ex. Smith',
+                                errorText: validateLastName(),
+                                prefixIcon: Icon(Icons.person),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+                Column(
+                  children: [
+                    if (_image != null) ...[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20, top: 30),
+                        child: Image.file(_image!,
+                            width: screenWidth * 0.2,
+                            height: screenWidth * 0.2,
+                            fit: BoxFit.cover),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              getImage();
+                            },
+                            child: Text("Replace Image")),
+                      ),
+                    ] else ...[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 55),
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  Color.fromRGBO(88, 144, 255, 1)),
+                            ),
+                            onPressed: () {
+                              getImage();
+                            },
+                            child: Text("Add Image")),
+                      ),
+                    ],
+                  ],
+                )
               ],
             ),
 
@@ -477,19 +588,7 @@ class _RegisterState extends State<Register> {
                             ageCheck == 0) {
                           setState(() {});
                         } else {
-                          Map req = new Map();
-                          req = {
-                            "firstName": firstName.text, // primary key
-                            "lastName": lastName.text,
-                            "email": email.text,
-                            "ageTest": ageCheck.toString(),
-                            "password": password.text,
-                          };
-                          var baseUrl =
-                              Uri.parse("http://10.0.2.2:3000/api/createUser");
-                          var response = await http.post(baseUrl, body: req);
-
-                          print(response.body);
+                          sendRegisterWithFile();
 
                           setState(() {
                             // UserSimplePreferences.setRememberUser(false);
