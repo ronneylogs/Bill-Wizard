@@ -92,7 +92,7 @@ class _NavBarState extends State<NavBar> {
   // Availabel screens in navbar
   final List pages = [
     const Home(),
-    const Split(),
+    // const Split(),
     const Settings(),
   ];
   int currentIndex = 0;
@@ -116,8 +116,9 @@ class _NavBarState extends State<NavBar> {
           color: Colors.white,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: GNav(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               activeColor: Colors.black,
               color: Colors.black,
               backgroundColor: Colors.white,
@@ -128,10 +129,10 @@ class _NavBarState extends State<NavBar> {
                   currentIndex = index;
                 });
               },
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(5),
               tabs: [
-                GButton(icon: Icons.home, text: 'Home'),
-                GButton(icon: Icons.money, text: 'Split'),
+                GButton(icon: Icons.money, text: 'Dash'),
+                // GButton(icon: Icons.money, text: 'Split'),
                 GButton(icon: Icons.settings, text: 'Settings'),
               ]),
         ),
