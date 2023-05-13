@@ -59,9 +59,9 @@ class inboxCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.blue),
-            borderRadius: BorderRadius.all(Radius.circular(5))),
+            color: Color(0xFFCED2CC),
+            // border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
         child: const Padding(
           padding: EdgeInsets.all(10),
           child: SizedBox(
@@ -91,10 +91,11 @@ class receiptCard extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            color: Colors.white,
-            border: Border.all(color: Colors.black)),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Color(0xFFDADADA),
+          // border: Border.all(color: Colors.black),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
@@ -104,7 +105,7 @@ class receiptCard extends StatelessWidget {
                   child: Image(
                     image: img.image,
                   )),
-              Text(title)
+              Text(title, style: TextStyle(fontWeight: FontWeight.bold))
             ]),
           ),
         ),
