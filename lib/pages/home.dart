@@ -66,8 +66,8 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Money to collect",
                     style: TextStyle(
-                        // color: Colors.white,
-                        fontSize: screenWidth * 0.1,
+                        color: Colors.grey[800],
+                        fontSize: screenWidth * 0.075,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -80,8 +80,8 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Money to owe",
                     style: TextStyle(
-                        // color: Colors.white,
-                        fontSize: screenWidth * 0.1,
+                        color: Colors.grey[800],
+                        fontSize: screenWidth * 0.08,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
