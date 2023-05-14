@@ -10,12 +10,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserSimplePreferences {
   static late SharedPreferences _preferences;
 
+  // Checks to see if user is logged in or not
   static const _keyLogged = "logged in?";
 
+  // Checks to see if this is the initial launch of the app
   static const _firstLaunch = "first launch?";
 
+  // Checks to see if remember user is checked
   static const _rememberUser = "remember user?";
 
+  // For keeping track of the username and password.
+  // Used for when rememeber user is ticked
   static const _username = "username";
 
   static const _password = "password";

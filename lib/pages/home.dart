@@ -6,6 +6,19 @@ import 'package:flutter/material.dart';
 // Package for the utilities.
 import '../utilities/card.dart';
 
+// Package for other screens.
+import '../utilities/global.dart';
+import '../main.dart';
+
+List<Widget> test = [
+  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+];
+
 // This class is for the home page.
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -49,14 +62,17 @@ class _HomeState extends State<Home> {
             Container(
               height: screenHeight * 0.2,
               child: Scrollbar(
-                child: ListView(scrollDirection: Axis.horizontal, children: [
-                  receiptCard(
-                      Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-                  receiptCard(
-                      Image.asset("assets/images/receipt.png"), "Apple Bees"),
-                  receiptCard(
-                      Image.asset("assets/images/receipt.png"), "Whitespot"),
-                ]),
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: globalInfo.receiptList
+                    // receiptCard(
+                    //     Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+                    // receiptCard(
+                    //     Image.asset("assets/images/receipt.png"), "Apple Bees"),
+                    // receiptCard(
+                    //     Image.asset("assets/images/receipt.png"), "Whitespot"),
+
+                    ),
               ),
             ),
             Row(

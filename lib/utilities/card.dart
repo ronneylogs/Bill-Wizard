@@ -9,20 +9,29 @@ import 'package:billwizard/pages/addReceipt.dart';
 import '../pages/inbox.dart';
 
 // Class for plus card.
-class plusCard extends StatelessWidget {
+class plusCard extends StatefulWidget {
   const plusCard({super.key});
 
+  @override
+  State<plusCard> createState() => _plusCardState();
+}
+
+class _plusCardState extends State<plusCard> {
   @override
   Widget build(BuildContext context) {
     // For getting screen dimensions.
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         // bring user to receipt add page
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return addReceipt();
-        }));
+        Navigator.push(
+                context, MaterialPageRoute(builder: (context) => addReceipt()))
+            .then((value) {
+          setState(() {
+            // refresh state
+          });
+        });
       },
       child: Container(
         decoration: BoxDecoration(

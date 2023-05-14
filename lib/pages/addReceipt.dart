@@ -4,6 +4,7 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:billwizard/pages/home.dart';
 import 'package:billwizard/pages/register.dart';
 import 'package:flutter/material.dart';
 // import 'dart.io';
@@ -24,6 +25,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../main.dart';
+import '../utilities/api.dart';
 
 // Function for adding receipt.
 Future<void> sendRequestWithFile() async {
@@ -514,7 +516,26 @@ class _addReceiptState extends State<addReceipt> {
 
                               // print(response.body);
                               sendRequestWithFile();
-                              Navigator.pop(context);
+                              // Grab user receipts
+                              Future<List<Widget>> list =
+                                  loadReceipts(globalInfo.email);
+                              while (globalInfo.receiptList.length !=
+                                  (await list).length) {
+                                globalInfo.receiptList = (await list);
+                                await Future.delayed(Duration(seconds: 1));
+                              }
+
+                              print(globalInfo.receiptList.length);
+                              print((await list).length);
+
+                              // globalInfo.receiptList = (await list);
+
+                              // setState(() {});
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const Home(),
+                                ),
+                              );
                             },
                             child: Text("Submit",
                                 style:

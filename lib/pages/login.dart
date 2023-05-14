@@ -62,9 +62,12 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                    height: screenHeight * 0.2,
-                    child: Image.asset('assets/images/wizard.png'))
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: SizedBox(
+                      height: screenHeight * 0.2,
+                      child: Image.asset('assets/images/wizard.png')),
+                )
               ],
             ),
             Row(
@@ -100,211 +103,226 @@ class _LoginState extends State<Login> {
               padding: EdgeInsets.only(top: screenHeight * 0.01),
               child: loginCard(
                 Container(
-                    child: Column(children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text("Email",
-                            style: TextStyle(fontSize: screenWidth * 0.05)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Container(
-                          width: screenWidth * 0.7,
-                          height: screenHeight * 0.1,
-                          child: TextField(
-                            controller: usernameLogIn,
-                            // keyboardType: TextInputType.number,
-                            // inputFormatters: [
-                            //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
-                            // ],
-                            onChanged: (val) {
-                              usernameLogIn.value = TextEditingValue(
-                                text: val,
-                                selection:
-                                    TextSelection.collapsed(offset: val.length),
-                              );
-                              setState(() {});
-                            },
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 2.0),
-                              ),
-                              hintText: 'email',
-                              prefixIcon: Icon(Icons.person),
-                            ),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Text("Email",
+                                style: TextStyle(fontSize: screenWidth * 0.05)),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text("Password",
-                            style: TextStyle(fontSize: screenWidth * 0.05)),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Container(
-                          width: screenWidth * 0.7,
-                          // height: screenHeight * 0.1,
-                          child: TextField(
-                            obscureText: true,
-                            controller: passwordLogIn,
-                            // keyboardType: TextInputType.number,
-                            // inputFormatters: [
-                            //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
-                            // ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Container(
+                              width: screenWidth * 0.7,
+                              height: screenHeight * 0.1,
+                              child: TextField(
+                                controller: usernameLogIn,
+                                // keyboardType: TextInputType.number,
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                                // ],
+                                onChanged: (val) {
+                                  usernameLogIn.value = TextEditingValue(
+                                    text: val,
+                                    selection: TextSelection.collapsed(
+                                        offset: val.length),
+                                  );
+                                  setState(() {});
+                                },
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 2.0),
+                                  ),
+                                  hintText: 'email',
+                                  prefixIcon: Icon(Icons.person),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Text("Password",
+                                style: TextStyle(fontSize: screenWidth * 0.05)),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Container(
+                              width: screenWidth * 0.7,
+                              // height: screenHeight * 0.1,
+                              child: TextField(
+                                obscureText: true,
+                                controller: passwordLogIn,
+                                // keyboardType: TextInputType.number,
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                                // ],
 
-                            onChanged: (val) {
-                              passwordLogIn.value = TextEditingValue(
-                                text: val,
-                                selection:
-                                    TextSelection.collapsed(offset: val.length),
-                              );
-                              setState(() {});
-                            },
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 2.0),
+                                onChanged: (val) {
+                                  passwordLogIn.value = TextEditingValue(
+                                    text: val,
+                                    selection: TextSelection.collapsed(
+                                        offset: val.length),
+                                  );
+                                  setState(() {});
+                                },
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 2.0),
+                                  ),
+                                  hintText: 'password',
+                                  prefixIcon: Icon(Icons.password_outlined),
+                                ),
                               ),
-                              hintText: 'password',
-                              prefixIcon: Icon(Icons.password_outlined),
                             ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  if (logInError) ...[
-                    Row(
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 15.0, bottom: 15.08),
-                          child: Text("Incorrect password or email.",
-                              style: TextStyle(color: Colors.red)),
+                          )
+                        ],
+                      ),
+                      if (logInError) ...[
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 15.0, bottom: 15.08),
+                              child: Text("Incorrect password or email.",
+                                  style: TextStyle(color: Colors.red)),
+                            )
+                          ],
                         )
                       ],
-                    )
-                  ],
-                  Row(children: [
-                    Checkbox(
-                      checkColor: Colors.white,
-                      // fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: rememberUser,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          rememberUser = value!;
-                          UserSimplePreferences.setRememberUser(rememberUser);
-                        });
-                      },
-                    ),
-                    Text("Remember me?")
-                  ]),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0, bottom: 40),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return Register();
-                            }));
+                      Row(children: [
+                        Checkbox(
+                          checkColor: Colors.white,
+                          // fillColor: MaterialStateProperty.resolveWith(getColor),
+                          value: rememberUser,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              rememberUser = value!;
+                              UserSimplePreferences.setRememberUser(
+                                  rememberUser);
+                            });
                           },
-                          child: Text(
-                            "Register",
-                            style: TextStyle(
-                                fontSize: screenWidth * 0.04,
-                                color: Colors.blue),
-                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: SizedBox(
-                          width: screenWidth * 0.7,
-                          height: screenHeight * 0.045,
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color.fromRGBO(88, 144, 255, 1)),
-                              ),
-                              onPressed: () async {
-                                if (rememberUser) {
-                                  UserSimplePreferences.setRememberUsername(
-                                      usernameLogIn.text);
-                                  UserSimplePreferences.setRememberPassword(
-                                      passwordLogIn.text);
-                                } else {
-                                  UserSimplePreferences.setRememberUsername("");
-                                  UserSimplePreferences.setRememberPassword("");
-                                }
-                                Map req = new Map();
-                                req = {
-                                  "email": usernameLogIn.text,
-                                  "password": passwordLogIn.text,
-                                };
-                                var baseUrl =
-                                    Uri.parse("http://10.0.2.2:3000/api/logIn");
-                                var response =
-                                    await http.post(baseUrl, body: req);
-
-                                print(response.body);
-
-                                if (response.body ==
-                                    "Incorrect password or email.") {
-                                  setState(() {
-                                    logInError = true;
-                                  });
-                                } else {
-                                  setState(() {
-                                    logInError = false;
-                                  });
-                                  Future<Map<String, dynamic>> userInfo =
-                                      grabUserInfo(usernameLogIn.text);
-
-                                  // Stores user info
-                                  globalInfo.email = usernameLogIn.text;
-                                  globalInfo.firstName =
-                                      (await userInfo)['first_name'];
-                                  globalInfo.lastName =
-                                      (await userInfo)['last_name'];
-
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return NavBar(title: "hi");
-                                  }));
-                                }
+                        Text("Remember me?")
+                      ]),
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 15.0, bottom: 40),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Register();
+                                }));
                               },
-                              child: Text("Log in")),
-                        ),
+                              child: Text(
+                                "Register",
+                                style: TextStyle(
+                                    fontSize: screenWidth * 0.04,
+                                    color: Colors.blue),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: SizedBox(
+                              width: screenWidth * 0.7,
+                              height: screenHeight * 0.045,
+                              child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Color.fromRGBO(88, 144, 255, 1)),
+                                  ),
+                                  onPressed: () async {
+                                    if (rememberUser) {
+                                      UserSimplePreferences.setRememberUsername(
+                                          usernameLogIn.text);
+                                      UserSimplePreferences.setRememberPassword(
+                                          passwordLogIn.text);
+                                    } else {
+                                      UserSimplePreferences.setRememberUsername(
+                                          "");
+                                      UserSimplePreferences.setRememberPassword(
+                                          "");
+                                    }
+                                    Map req = new Map();
+                                    req = {
+                                      "email": usernameLogIn.text,
+                                      "password": passwordLogIn.text,
+                                    };
+                                    var baseUrl = Uri.parse(
+                                        "http://10.0.2.2:3000/api/logIn");
+                                    var response =
+                                        await http.post(baseUrl, body: req);
+
+                                    print(response.body);
+
+                                    if (response.body ==
+                                        "Incorrect password or email.") {
+                                      setState(() {
+                                        logInError = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        logInError = false;
+                                      });
+
+                                      // Grab user information
+                                      Future<Map<String, dynamic>> userInfo =
+                                          loadUserInfo(usernameLogIn.text);
+
+                                      // Grab user receipts
+                                      Future<List<Widget>> userReceipts =
+                                          loadReceipts(usernameLogIn.text);
+
+                                      // Stores user info
+                                      globalInfo.email = usernameLogIn.text;
+                                      globalInfo.firstName =
+                                          (await userInfo)['first_name'];
+                                      globalInfo.lastName =
+                                          (await userInfo)['last_name'];
+
+                                      globalInfo.receiptList =
+                                          (await userReceipts);
+
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return NavBar(title: "hi");
+                                      }));
+                                    }
+                                  },
+                                  child: Text("Log in")),
+                            ),
+                          )
+                        ],
                       )
-                    ],
-                  )
-                ])),
+                    ])),
               ),
             ),
           ],
