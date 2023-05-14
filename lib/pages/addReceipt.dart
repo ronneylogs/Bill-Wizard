@@ -33,8 +33,12 @@ Future<void> sendRequestWithFile() async {
       'POST', Uri.parse('http://10.0.2.2:3000/api/createReceipt'));
 
   // Add the file to the request
-  var file = await http.MultipartFile.fromPath('image', imgPath);
-  request.files.add(file);
+  try {
+    var file = await http.MultipartFile.fromPath('image', imgPath);
+    request.files.add(file);
+  } catch (e) {
+    print("No image");
+  }
 
   // Add additional fields
   request.fields['location'] = location.text;
@@ -85,7 +89,7 @@ String year = "2023";
 double grandTotal = 0;
 
 // Keeps track of image path.
-late String imgPath;
+String imgPath = "";
 
 class addReceipt extends StatefulWidget {
   const addReceipt({super.key});
