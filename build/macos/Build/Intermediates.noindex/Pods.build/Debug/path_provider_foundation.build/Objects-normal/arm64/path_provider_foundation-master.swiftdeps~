@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "04477c71b2e4d798d07411b3bb5881504a8ba6b2895d7fc59c8af845f22ab748"
+build_start_time: [1684259976, 548835039]
+build_end_time: [1684259976, 575861930]
+inputs:
+  "/Users/ronneylok/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2/macos/Classes/PathProviderPlugin.swift": !private [1683395715, 768957614]
+  "/Users/ronneylok/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2/macos/Classes/messages.g.swift": !private [1683395715, 769336938]

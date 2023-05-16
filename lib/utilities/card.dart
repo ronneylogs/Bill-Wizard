@@ -50,6 +50,39 @@ class _plusCardState extends State<plusCard> {
   }
 }
 
+class addFriendCard extends StatefulWidget {
+  const addFriendCard({super.key});
+
+  @override
+  State<addFriendCard> createState() => _addFriendCardState();
+}
+
+class _addFriendCardState extends State<addFriendCard> {
+  @override
+  Widget build(BuildContext context) {
+    // For getting screen dimensions.
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.orange,
+            // border: Border.all(color: Colors.blue.shade200),
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+              child: Text("Add Friends",
+                  style: TextStyle(
+                      fontSize: screenWidth * 0.035,
+                      fontWeight: FontWeight.w600))),
+        ),
+      ),
+    );
+  }
+}
+
 // Class for inbox card.
 class inboxCard extends StatelessWidget {
   const inboxCard({super.key});
