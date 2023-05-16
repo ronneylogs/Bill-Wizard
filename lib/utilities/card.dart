@@ -1,6 +1,7 @@
 // This file is to store the card widgets.
 
 // Package for general flutter.
+import 'package:billwizard/pages/addFriend.dart';
 import 'package:flutter/material.dart';
 
 // Package for other pages.
@@ -64,7 +65,16 @@ class _addFriendCardState extends State<addFriendCard> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        // bring user to friend add page
+        Navigator.push(context,
+                MaterialPageRoute(builder: (context) => addFriendPage()))
+            .then((value) {
+          setState(() {
+            // refresh state
+          });
+        });
+      },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.orange,
