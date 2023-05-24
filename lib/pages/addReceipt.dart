@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:billwizard/pages/home.dart';
 import 'package:billwizard/pages/register.dart';
+import 'package:billwizard/utilities/data_provider.dart';
 import 'package:flutter/material.dart';
 // import 'dart.io';
 
@@ -535,11 +536,7 @@ class _addReceiptState extends State<addReceipt> {
                               // globalInfo.receiptList = (await list);
 
                               // setState(() {});
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const Home(),
-                                ),
-                              );
+                              Navigator.of(context).pop();
                             },
                             child: Text("Submit",
                                 style:

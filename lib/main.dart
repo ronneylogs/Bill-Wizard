@@ -25,6 +25,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 // Package for async.
 import 'dart:async';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 // Class to store global data.
 Global globalInfo = new Global();
 
@@ -57,7 +59,7 @@ void main() async {
   password_shared = UserSimplePreferences.getRememberPassword() ?? "";
 
   // Runs the app.
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 // Class for the root of the app.

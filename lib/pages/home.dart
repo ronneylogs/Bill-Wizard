@@ -1,7 +1,9 @@
 // This file is for the home page UI.
 
 // Package for general Flutter.
+import 'package:billwizard/utilities/data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Package for the utilities.
 import '../utilities/card.dart';
@@ -9,6 +11,7 @@ import '../utilities/card.dart';
 // Package for other screens.
 import '../utilities/global.dart';
 import '../main.dart';
+import '../utilities/models/receipt_model.dart';
 
 List<Widget> test = [
   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
@@ -20,16 +23,13 @@ List<Widget> test = [
 ];
 
 // This class is for the home page.
-class Home extends StatefulWidget {
+class Home extends ConsumerWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _receiptData = ref.watch(receiptDataProvider);
 
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
     // For getting screen dimensions.
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -61,19 +61,29 @@ class _HomeState extends State<Home> {
             ),
             Container(
               height: screenHeight * 0.2,
-              child: Scrollbar(
-                child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: globalInfo.receiptList
-                    // receiptCard(
-                    //     Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-                    // receiptCard(
-                    //     Image.asset("assets/images/receipt.png"), "Apple Bees"),
-                    // receiptCard(
-                    //     Image.asset("assets/images/receipt.png"), "Whitespot"),
-
-                    ),
-              ),
+              child: _receiptData.when(
+                  data: (_receiptData) {
+                    List<ReceiptModel> receiptList =
+                        _receiptData.map((e) => e).toList();
+                    return Row(
+                      children: [
+                        Expanded(
+                            child: Scrollbar(
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: receiptList.length,
+                              itemBuilder: (_, index) {
+                                return receiptCard(
+                                    Image.asset("assets/images/receipt.png"),
+                                    receiptList[index].location);
+                              }),
+                        ))
+                      ],
+                    );
+                  },
+                  error: (err, s) => Text(err.toString()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator())),
             ),
             Row(
               children: [
