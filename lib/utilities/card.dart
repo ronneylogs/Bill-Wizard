@@ -2,24 +2,21 @@
 
 // Package for general flutter.
 import 'package:billwizard/pages/addFriend.dart';
+import 'package:billwizard/utilities/data_provider.dart';
 import 'package:flutter/material.dart';
 
 // Package for other pages.
 import 'package:billwizard/pages/addReceipt.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../pages/inbox.dart';
 
 // Class for plus card.
-class plusCard extends StatefulWidget {
+class plusCard extends ConsumerWidget {
   const plusCard({super.key});
 
   @override
-  State<plusCard> createState() => _plusCardState();
-}
-
-class _plusCardState extends State<plusCard> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // For getting screen dimensions.
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -29,9 +26,7 @@ class _plusCardState extends State<plusCard> {
         Navigator.push(
                 context, MaterialPageRoute(builder: (context) => addReceipt()))
             .then((value) {
-          setState(() {
-            // refresh state
-          });
+          ref.refresh(receiptDataProvider);
         });
       },
       child: Container(

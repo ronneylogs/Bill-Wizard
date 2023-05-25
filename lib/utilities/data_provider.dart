@@ -10,5 +10,6 @@ final receiptDataProvider = FutureProvider<List<ReceiptModel>>((
   ref,
 ) async {
   return ref.read(receiptProvider).getReceipts();
-  // return ref.read(receiptProvider).getReceipts();
 });
+
+final receiptApiRequest = StateProvider<bool>((ref) => false);

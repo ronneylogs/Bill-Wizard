@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 import '../main.dart';
 import 'models/receipt_model.dart';
 
-class ApiServices {
+class receiptApiServices {
   String endpoint = "http://10.0.2.2:3000/api/loadContent";
 
   Future<List<ReceiptModel>> getReceipts() async {
@@ -28,4 +28,5 @@ class ApiServices {
 }
 
 // Entry point of shared data
-final receiptProvider = Provider<ApiServices>((ref) => ApiServices());
+final receiptProvider =
+    Provider<receiptApiServices>((ref) => receiptApiServices());
