@@ -533,9 +533,14 @@ class _addReceiptState extends State<addReceipt> {
                               print(globalInfo.receiptList.length);
                               print((await list).length);
 
-                              // globalInfo.receiptList = (await list);
+                              // Clean up input fields
+                              location.text = "";
+                              time.text = "";
+                              subTotal.text = "";
+                              tip.text = "";
+                              tax.text = "";
+                              grandTotal = 0;
 
-                              // setState(() {});
                               Navigator.of(context).pop();
                             },
                             child: Text("Submit",
