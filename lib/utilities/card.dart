@@ -2,7 +2,9 @@
 
 // Package for general flutter.
 import 'package:billwizard/pages/addFriend.dart';
+import 'package:billwizard/pages/receipt.dart';
 import 'package:billwizard/utilities/data_provider.dart';
+import 'package:billwizard/utilities/models/receipt_model.dart';
 import 'package:flutter/material.dart';
 
 // Package for other pages.
@@ -31,7 +33,7 @@ class plusCard extends ConsumerWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Color.fromRGBO(88, 144, 255, 1),
+            color: Color.fromRGBO(0, 122, 255, 1),
             // border: Border.all(color: Colors.blue.shade200),
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
@@ -122,19 +124,23 @@ class inboxCard extends StatelessWidget {
 }
 
 // Class for receipt card.
-class receiptCard extends StatelessWidget {
-  receiptCard(this.img, this.title);
+class receiptCard extends ConsumerWidget {
+  receiptCard(this.img, this.receiptInfo);
   Image img;
-  String title;
+  ReceiptModel receiptInfo;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // For getting screen dimensions.
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        // Navigate to the receipt.
+        Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => receiptPage(receiptInfo)))
+            .then((value) {});
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -152,7 +158,8 @@ class receiptCard extends StatelessWidget {
                   child: Image(
                     image: img.image,
                   )),
-              Text(title, style: TextStyle(fontWeight: FontWeight.bold))
+              Text(receiptInfo.location,
+                  style: TextStyle(fontWeight: FontWeight.bold))
             ]),
           ),
         ),

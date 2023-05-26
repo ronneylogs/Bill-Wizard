@@ -155,6 +155,9 @@ class _addReceiptState extends State<addReceipt> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
+            // margin: const EdgeInsets.all(15.0),
+            // padding: const EdgeInsets.all(3.0),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -216,6 +219,10 @@ class _addReceiptState extends State<addReceipt> {
                           Padding(
                             padding: const EdgeInsets.only(right: 55),
                             child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color.fromRGBO(0, 122, 255, 1)),
+                                ),
                                 onPressed: () {
                                   getImage();
                                 },
@@ -227,7 +234,7 @@ class _addReceiptState extends State<addReceipt> {
                             child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                      Color.fromRGBO(88, 144, 255, 1)),
+                                      Color.fromRGBO(0, 122, 255, 1)),
                                 ),
                                 onPressed: () {
                                   getImage();
@@ -491,61 +498,66 @@ class _addReceiptState extends State<addReceipt> {
                 ),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(
-                            left: 15, right: 8, bottom: 10),
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  Color.fromRGBO(88, 144, 255, 1)),
-                            ),
-                            onPressed: () async {
-                              print(globalInfo.email);
-                              time.text = "${month} ${day} ${year}";
-                              // Map req = new Map();
-                              // req = {
-                              //   "location": location.text,
-                              //   "when": time.text,
-                              //   "subTotal": subTotal.text,
-                              //   "tax": tax.text,
-                              //   "tip": tip.text,
-                              //   "payerEmail": globalInfo.email,
-                              //   "split": false,
-                              //   "image":
-                              // };
-                              // var baseUrl = Uri.parse(
-                              //     "http://10.0.2.2:3000/api/createReceipt");
-                              // var response =
-                              //     await http.post(baseUrl, body: req);
+                            top: 35, left: 0, right: 0, bottom: 10),
+                        child: SizedBox(
+                          width: 250,
+                          height: 45,
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromRGBO(0, 122, 255, 1)),
+                              ),
+                              onPressed: () async {
+                                print(globalInfo.email);
+                                time.text = "${month} ${day} ${year}";
+                                // Map req = new Map();
+                                // req = {
+                                //   "location": location.text,
+                                //   "when": time.text,
+                                //   "subTotal": subTotal.text,
+                                //   "tax": tax.text,
+                                //   "tip": tip.text,
+                                //   "payerEmail": globalInfo.email,
+                                //   "split": false,
+                                //   "image":
+                                // };
+                                // var baseUrl = Uri.parse(
+                                //     "http://10.0.2.2:3000/api/createReceipt");
+                                // var response =
+                                //     await http.post(baseUrl, body: req);
 
-                              // print(response.body);
-                              sendRequestWithFile();
-                              // Grab user receipts
-                              Future<List<Widget>> list =
-                                  loadReceipts(globalInfo.email);
-                              while (globalInfo.receiptList.length !=
-                                  (await list).length) {
-                                globalInfo.receiptList = (await list);
-                                await Future.delayed(Duration(seconds: 1));
-                              }
+                                // print(response.body);
+                                await sendRequestWithFile();
+                                // Grab user receipts
+                                // Future<List<Widget>> list =
+                                //     loadReceipts(globalInfo.email);
+                                // while (globalInfo.receiptList.length !=
+                                //     (await list).length) {
+                                //   globalInfo.receiptList = (await list);
+                                //   await Future.delayed(Duration(seconds: 1));
+                                // }
 
-                              print(globalInfo.receiptList.length);
-                              print((await list).length);
+                                // print(globalInfo.receiptList.length);
+                                // print((await list).length);
 
-                              // Clean up input fields
-                              location.text = "";
-                              time.text = "";
-                              subTotal.text = "";
-                              tip.text = "";
-                              tax.text = "";
-                              grandTotal = 0;
+                                Navigator.of(context).pop();
 
-                              Navigator.of(context).pop();
-                            },
-                            child: Text("Submit",
-                                style:
-                                    TextStyle(fontSize: screenWidth * 0.04)))),
+                                // Clean up input fields
+                                location.text = "";
+                                time.text = "";
+                                subTotal.text = "";
+                                tip.text = "";
+                                tax.text = "";
+                                grandTotal = 0;
+                              },
+                              child: Text("Submit",
+                                  style:
+                                      TextStyle(fontSize: screenWidth * 0.04))),
+                        )),
                   ],
                 )
               ],

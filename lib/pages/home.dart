@@ -13,14 +13,14 @@ import '../utilities/global.dart';
 import '../main.dart';
 import '../utilities/models/receipt_model.dart';
 
-List<Widget> test = [
-  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
-];
+// List<Widget> test = [
+//   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+//   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+//   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+//   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+//   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+//   receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),
+// ];
 
 // This class is for the home page.
 class Home extends ConsumerWidget {
@@ -75,7 +75,7 @@ class Home extends ConsumerWidget {
                               itemBuilder: (_, index) {
                                 return receiptCard(
                                     Image.asset("assets/images/receipt.png"),
-                                    receiptList[index].location);
+                                    receiptList[index]);
                               }),
                         ))
                       ],

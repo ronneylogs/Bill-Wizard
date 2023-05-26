@@ -298,8 +298,8 @@ class _LoginState extends State<Login> {
                                           loadUserInfo(usernameLogIn.text);
 
                                       // Grab user receipts
-                                      Future<List<Widget>> userReceipts =
-                                          loadReceipts(usernameLogIn.text);
+                                      // Future<List<Widget>> userReceipts =
+                                      //     loadReceipts(usernameLogIn.text);
 
                                       // Stores user info
                                       globalInfo.email = usernameLogIn.text;
@@ -308,8 +308,8 @@ class _LoginState extends State<Login> {
                                       globalInfo.lastName =
                                           (await userInfo)['last_name'];
 
-                                      globalInfo.receiptList =
-                                          (await userReceipts);
+                                      // globalInfo.receiptList =
+                                      //     (await userReceipts);
 
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {

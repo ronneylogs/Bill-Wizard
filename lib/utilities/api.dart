@@ -23,8 +23,8 @@ Future<List<Widget>> loadReceipts(String email) async {
   List<receiptCard> receiptList = [];
 
   for (int i = 0; i < parsedJson.length; i++) {
-    receiptList.add(receiptCard(
-        Image.asset("assets/images/receipt.png"), parsedJson[i]['location']));
+    receiptList.add(
+        receiptCard(Image.asset("assets/images/receipt.png"), parsedJson[i]));
   }
 
   // List<receiptCard> receiptsreceipt = [receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),  receiptCard(Image.asset("assets/images/receipt.png"), "Boston Pizza"),];
