@@ -11,6 +11,8 @@ class receiptPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //80% of screen width
+    double c_width = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -34,64 +36,107 @@ class receiptPage extends ConsumerWidget {
               ],
             ),
             const Spacer(flex: 1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // const Spacer(),
+                receiptPageBox(c_width),
+                // const Spacer(flex: 3),
+              ],
+            ),
+            // const Spacer(flex: 1),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: const Color.fromRGBO(0, 122, 255, 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          data.location != ""
-                              ? Text(
-                                  "Location: ${data.location}",
-                                  style: const TextStyle(
-                                      fontSize: 25, color: Colors.white),
-                                )
-                              : const Text("Location: None Provided",
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white)),
-                          data.subTotal != ""
-                              ? Text("Subtotal: ${data.subTotal}",
-                                  style: const TextStyle(
-                                      fontSize: 25, color: Colors.white))
-                              : const Text("Subtotal: None Provided",
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white)),
-                          data.tax != ""
-                              ? Text("Tax: ${data.tax}",
-                                  style: const TextStyle(
-                                      fontSize: 25, color: Colors.white))
-                              : const Text("Tax: None Provided",
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white)),
-                          data.tip != ""
-                              ? Text(
-                                  "Tip: ${data.tip}",
-                                  style: const TextStyle(
-                                      fontSize: 25, color: Colors.white),
-                                )
-                              : const Text("Tip: None Provided",
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white)),
-                        ],
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(0, 122, 255, 1),
                       ),
-                    ),
-                  ),
-                  const Spacer(flex: 3),
+                      onPressed: () {},
+                      child: Text("Split this bill")),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                      onPressed: () {},
+                      child: Text("Remove")),
                 ],
               ),
             ),
-            const Spacer(flex: 4),
+
+            Spacer(),
           ],
         )),
+      ),
+    );
+  }
+
+// Receipt Box
+  Container receiptPageBox(double c_width) {
+    return Container(
+      width: c_width,
+      decoration: BoxDecoration(
+          color: Colors.grey[700], borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            data.location != ""
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Location: ${data.location}",
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text("Location: None Provided",
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  ),
+            data.subTotal != ""
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Subtotal: ${data.subTotal}",
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white)),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text("Subtotal: None Provided",
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  ),
+            data.tax != ""
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Tax: ${data.tax}",
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white)),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text("Tax: None Provided",
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  ),
+            data.tip != ""
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Tip: ${data.tip}",
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text("Tip: None Provided",
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  ),
+          ],
+        ),
       ),
     );
   }

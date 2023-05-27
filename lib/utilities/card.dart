@@ -143,6 +143,7 @@ class receiptCard extends ConsumerWidget {
             .then((value) {});
       },
       child: Container(
+        width: 170,
         margin: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -153,12 +154,16 @@ class receiptCard extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
             child: Column(children: [
+              Text(receiptInfo.when,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               SizedBox(
-                  width: screenWidth * 0.3,
+                  width: screenWidth * 0.25,
                   child: Image(
                     image: img.image,
                   )),
               Text(receiptInfo.location,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontWeight: FontWeight.bold))
             ]),
           ),

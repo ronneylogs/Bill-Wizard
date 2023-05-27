@@ -36,7 +36,7 @@ class _addFriendPageState extends State<addFriendPage> {
               clipper: WaveClipperOne(),
               child: Container(
                 height: 200,
-                color: Colors.orange,
+                color: Color.fromRGBO(0, 122, 255, 1),
                 child: Center(child: Text("")),
               ),
             ),
@@ -77,13 +77,13 @@ class _addFriendPageState extends State<addFriendPage> {
                   width: screenWidth * 0.4,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.orange // Background color
-                          ),
+                        primary: Color.fromRGBO(0, 122, 255, 1),
+                      ),
                       onPressed: () {},
                       child: Text("Send Request",
                           style: TextStyle(
                               fontSize: screenWidth * 0.04,
-                              color: Colors.black)))),
+                              color: Colors.white)))),
             ),
             Spacer(),
             Spacer(),
@@ -93,7 +93,7 @@ class _addFriendPageState extends State<addFriendPage> {
               clipper: WaveClipperOne(flip: true, reverse: true),
               child: Container(
                 height: 200,
-                color: Colors.orange,
+                color: Color.fromRGBO(0, 122, 255, 1),
                 child: Center(child: Text("")),
               ),
             ),
