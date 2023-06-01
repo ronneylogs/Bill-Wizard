@@ -1,3 +1,4 @@
+import 'package:billwizard/pages/split.dart';
 import 'package:billwizard/utilities/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,7 +55,13 @@ class receiptPage extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromRGBO(0, 122, 255, 1),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SplitPage(data)))
+                            .then((value) {});
+                      },
                       child: Text("Split this bill")),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
